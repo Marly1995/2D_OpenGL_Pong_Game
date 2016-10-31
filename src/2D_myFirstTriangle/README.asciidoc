@@ -1,0 +1,86 @@
+== 2D My First Triangle
+:toc:
+:!numbered:
+
+=== Summary
+
+This example just renders a single, white triangle on a red background every frame.
+
+It is, more or less, the most simple OpenGL 3.3 program.
+
+We'll get the source, build it, then do some <<Activities,activities>> to strengthen our understanding. It is important to get through all these activities. If you get through them there are also some <<Stretch Activities, stretch activities>>.
+
+include::../../doc/_includes/gettingTheSource.asciidoc[]
+
+include::../../doc/_includes/buildAndRun.asciidoc[]
+
+=== Activities
+
+* You can do these in any order.
+* You may want to make a new git branch for these
+* Try to answer the questions for each also
+
+//
+
+. Make the background colour different
+  .. *Questions*
+    ... Which part of the code controls this?
+    ... What language is it?
+    ... How is the colour represented?
+  .. Blue
+  .. Green
+  .. Black
+  .. Yellow
+
+
+. Make the triangle a different colour
+  .. *Questions*
+    ... Which part of the code controls this?
+    ... What language is it?
+  .. Purple
+  .. Orange
+
+
+. Make the triangle change colour on a keypress
+  .. *Questions*
+    ... Which part of the code controls this? Where is triangle colour set?
+    ... How do you specify the key?
+        How do you pass information to where it is needed?
+    .. Make it change just once
+    .. Make it change each time the key is pressed
+
+. Add details to the console text
+  .. *Questions*
+    ... Where is text created?
+    ... Where is the text written to the console?
+    ... How does it change the text?
+    ... Where else can this text be created?
+  .. add how long the frame took to render
+  .. add the frames per second
+  .. make the frames per second an average over a few frames [stretch]
+
+. Make the triangle colour change over time
+  .. *Questions*
+    ... How do you know the time?
+    ... Do you pass in the time, or a color? Does it matter?
+  .. make the colour start at black, and get more red, forever
+  .. make the colour start at black, go fully red, go back to black, and repeat
+
+. Make the triangle have different colours for each of its points
+  .. Each "vertex" presently has position information
+  .. We want color information for each vertex also
+  .. *Questions*
+    ... Where is this information in our C++;
+    ... Where is this extra information needed?
+    ... How to you get this extra information to that point?
+      .... What happens to the information between these stages?
+    ... How do you specify that extra information?
+  .. Make the three vertices Red, Green, and Blue
+
+=== Stretch Activities
+
+. Print the colour of the triangle to the console
+. Make the colour of the triangle controlled by the mouse
+  .. in any way
+  .. with the x-axis controlling the "hue" and the y-axis the "brightness" - or something similar
+  .. only when a mouse button is pressed

@@ -1,0 +1,44 @@
+## Graphics dependencies
+
+Dependencies for OpenGL projects in C++
+
+### Tools
+
+- https://premake.github.io/[Premake5]
+  * https://github.com/premake/premake-core/releases/download/v5.0.0-alpha5/premake-5.0.0-alpha5-windows.zip[Windows binary, 5.0.0-alpha5]
+  * Ubuntu/Debian - https://github.com/premake/premake-core/releases/download/v5.0.0-alpha5/premake-5.0.0-alpha5-linux.tar.gz[Download binary] or https://github.com/premake/premake-core/wiki/Building-Premake[build from source]
+  * https://github.com/bkaradzic/genie[GENie] as an alternative
+
+### Libraries
+
+- https://www.libsdl.org/[SDL2]
+  * SDL2 2.0.3
+    ** https://buildbot.libsdl.org/sdl-builds/sdl-visualstudio/sdl-visualstudio-2555.zip[Windows Visual C++ 32/64 dev headers and binaries, daily build from 2015-09-27]
+      *** resolves http://www.gamedev.net/topic/664434-problem-installing-sdl-in-visual-studio-2015/#entry5210967
+    ** Ubuntu/Debian, package: libsdl2-dev
+
+- http://glew.sourceforge.net/[GLEW: The OpenGL Extension Wrangler Library]
+  * GLEW 1.13.0
+    ** https://sourceforge.net/projects/glew/files/glew/1.13.0/glew-1.13.0-win32.zip/download[Windows 32/64 dev headers and binaries]
+    ** Ubuntu/Debian, package: libglew-dev
+
+- http://glm.g-truc.net[OpenGL Mathematics (GLM) ]
+  * GLM 0.9.7.1
+    ** https://github.com/g-truc/glm/releases/download/0.9.7.1/glm-0.9.7.1.zip[Windows 32/64 source (header only library)]
+    ** Ubuntu/Debian, package: libglm-dev
+
+- https://www.libsdl.org/projects/SDL_image/[SDL_image]
+  * SDL2_image 2.0.0
+    ** https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.0-VC.zip[Windows Visual C++ 32/64 dev headers and binaries]
+    ** Ubuntu/Debian, package: libsdl2-image-dev
+
+- https://www.libsdl.org/projects/SDL_ttf/[SDL_ttf]
+  * SDL2_ttf 2.0.12
+    ** https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-devel-2.0.12-VC.zip[Windows Visual C++ 32/64 dev headers and binaries]
+    ** Ubuntu/Debian, package: libsdl2-ttf-dev
+
+- http://ffmpeg.zeranoe.com/builds/
+  * FFmpeg git-d897d4c 32-bit Dev
+    ** http://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20151027-git-d897d4c-win32-dev.7z[[Windows Visual C++ 32 dev headers and binaries]
+    ** Ubuntu/Debian, packages: libavutil-dev, libavcodec-dev, libavformat-dev, libavdevice-dev, libavfilter-dev, libswscale-dev, libswresample-dev, libpostproc-dev
+

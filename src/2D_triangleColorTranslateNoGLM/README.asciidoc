@@ -1,0 +1,67 @@
+== 2D Triangle Translation Without GLM
+:toc:
+:!numbered:
+
+=== Summary
+
+This example introduces how to move geometry (triangles) in OpenGL. It renders a single triangle with the position of the triangle changing over time.
+
+==== translationVector (Vertex Shader)
+
+Changing where geometry (triangles) appears on the screen is done by transforming the vertices for the triangle. This should be done in the Vertex Shader - it is the main job, or use, of the Vertex Shader. In order to transform a triangle we should apply the same transformation to all the vertices. In the case of simple 2D translation, we just need to alter the position of all the vertice by the same amount. We can use a Uniform variable for this - we'll call it `translationVector`. We'll initialise it to a value of (-0.5, -0.5), so that we can see that the triangle is moved.
+
+[source, glsl]
+----
+include::vertexShader.glsl[]
+----
+
+==== translationVector (pass:[C++])
+
+If you run the program with above Vertex Shader, you'll see the triangle appears in a new position. We now need to control that position from pass:[C++]. We need a number of things:
+
+. a pass:[C++] variable to store `translationVector`
+. a pass:[C++] variable to store `translationVelocityVector` - how fast the translation should change
+. a pass:[C++] variable to store the location of `translationVector` in the GLSL program, filled appropriately once the GLSL program has been compiled.
+. update the pass:[C++] `translationVector` over time
+. set the `translationVector` uniform on our program every frame
+
+===== pass:[C++] variable to store `translationVector` and `translationVelocityVector`
+
+We'll just use a `GLfloat` array (of length two), for the X and Y components, for each.
+
+[source, cpp]
+----
+include::main.cpp[tags=translationVector]
+----
+
+===== pass:[C++] variable to store the location of `translationVector` in the GLSL program
+
+We just need an `int` for storage, and to ask OpenGL for the value.
+
+[source, cpp]
+----
+include::main.cpp[tags=GLVariables]
+----
+
+[source, cpp]
+----
+include::main.cpp[tags=initializeProgram]
+----
+
+===== Update the pass:[C++] `translationVector` over time
+
+Our main loop calls updateSimulation every frame. How long we should simulate for is a parameter for this function, we is presently defaulting to 0.02 seconds. At some point we should calculate this correctly. For now, we are just assuming (hoping) that our frame rate is around 50 FPS.
+
+[source, cpp]
+----
+include::main.cpp[tags=updateSimulation]
+----
+
+NOTE: as `translationVector` is an array, we need to change both the 0th and 1st value.
+
+===== Set the `translationVector` uniform on our program every frame
+
+[source, cpp]
+----
+include::main.cpp[tags=render]
+----

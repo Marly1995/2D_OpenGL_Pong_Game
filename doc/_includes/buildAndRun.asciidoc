@@ -1,0 +1,49 @@
+=== Build the solution/make files
+
+* Initially, and whenever you change the branch, or the `premake5.lua` file, (re)run *premake*
+
+* make sure you have the repository - see <<gettingTheSource, gettingTheSource>>
+  ** make sure you are in the `master` branch, or have checked out the branch you want - see <<checkingOutAnExampleBranch, checking out an example branch>>
+  ** make sure your branch is up to date - run `git pull`
+* from the root of the repository
+
+==== Create the project files
+
+.Windows
+[source, bat]
+----
+./premake5.bat %ACTION% # <1> <2> <3>
+----
+
+.Linux, OS X
+[source, bash]
+----
+./premake5 $ACTION # <1> <2> <3>
+----
+
+<1> replace `ACTION` with the tool you wish to use - e.g. `vs2015` or `gmake`
+<2> uses the project specification given in the `premake5.lua` file. Have a look at it if you're interested.
+<3> try `premake5 --help` for the options
+
+==== Build your project
+
+===== Visual Studio
+
+1. Load the `.sln` file
+2. Build and run the project you wish to explore - kbd:[F5]
+
+  ** if there are multiple projects, btn:[right-click] and select `make active project` to make that project build/run by default
+  ** you can set the project to debug or release mode in the UI
+
+===== Make
+
+[source, bash]
+----
+make $EXAMPLE # <1> <2> <3> <4>
+./src/$EXAMPLE/$EXAMPLE-debug # <5>
+----
+<1> replace `EXAMPLE` with the example you wish to run
+<2> compile and link project `EXAMPLE`.
+<3> running just `make` will build all projects
+<4> use `make $EXAMPLE config=release` to build for release mode
+<5> run `EXAMPLE`. Strip off `-debug` for release builds

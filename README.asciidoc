@@ -1,0 +1,49 @@
+This is the source for the in-progress book *graphicsByExample*. It is hosted online at http://shearer12345.github.io/graphicsByExample
+
+Issues and pull requests are very welcome. :-)
+
+The open nature of this book is partially inspired by Robert Nystrom's excellent http://gameprogrammingpatterns.com/[Game Programming Patterns]
+
+## Getting example code
+
+* clone the repository recursively (to also pull down the dependencies)
+
+[source, bash]
+----
+git clone --recursive https://github.com/shearer12345/graphicsByExample.git
+----
+
+* OR fork the repository on github and clone it from your repository
+  ** you may want to then make your repository private
+
+## Example code
+
+* each example is complete and in a separate git branch
+  ** allowing you to `diff` between branches to see what has changed
+* the `master` branch composes all the example branches together for rapid demonstrations/explorations
+* all examples are in C++11, using modern OpenGL
+* all examples are cross-platform (Windows, Linux, OS X)
+
+## Building examples
+
+* we use https://premake.github.io/index.html[premake5] to build solutions and projects
+  ** Visual Studio 2005, 2008, 2010, 2012, 2013, 2015
+  ** Make
+  ** Xcode4
+  ** MonoDevelop
+
+* to build, in the root of the repository, run:
+
+include::doc/_includes/buildAndRun.asciidoc[]
+
+
+## Building the book
+
+NOTE: Section Pending
+
+## Licensing
+
+* the source code of this book is MIT licensed (see link:LICENSE[LICENSE])
+* the documentation of this book is licensed under a http://creativecommons.org/licenses/by-nc-sa/4.0/[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License]
+
+image::https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png[alt="CC by-nc-sa 4.0", link="http://creativecommons.org/licenses/by-nc-sa/4.0/"]

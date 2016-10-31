@@ -1,0 +1,30 @@
+=== Getting the source
+:repositoryURL: https://github.com/shearer12345/graphicsByExample
+* Repository is at {repositoryURL}
+
+* Either <<Clone_the_repository, clone>> or <<Fork_the_repository, fork the repository>>
+
+==== Clone the repository
+
+.Windows
+[source]
+----
+git clone --recursive https://github.com/shearer12345/graphicsByExample.git ## <1>
+----
+<1> The Windows dependencies are in a separate repository, connected as a submodule. The `--recursive` flag asks git to also pull down all the submodules. If you miss it by accident, you can after do `git submodule init`, followed by `git submodule update`
+
+.Linux, OS X
+[source, bash]
+----
+git clone https://github.com/shearer12345/graphicsByExample.git ## <1> <2>
+----
+<1> Linux dependencies should be installed through your package manager. These include: `build-essential`, `libsdl2-dev`, `libglew-dev`, `libsdl2-image-dev`, `libsdl2-ttf-dev`.
+<2> You'll also need link:https://premake.github.io/download.html[premake5] on your system and in the path.
+
+==== Fork the repository
+
+1. Goto {repositoryURL} in your browser
+2. Click the `fork` button (or use the link:{repositoryURL}#fork-destination-box[direct URL])
+3. Clone your version of the repository - see <<Clone_the_repository, Clone the repository (above)>>, but use your URL
+
+NOTE: you may want to clone the `ssh` url for your repository to make pushing easier

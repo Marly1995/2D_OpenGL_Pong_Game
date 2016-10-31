@@ -1,0 +1,116 @@
+== 2D Triangle Color Per Vertex
+:toc:
+:!numbered:
+
+=== Summary
+
+This example renders a single triangle with different colors for each vertex, on a red background every frame. The vertex colors are interpolated across the triangle by the rasterizer.
+
+==== Shader loading
+
+In our parent example (2D_myFirstTriangle) our Vertex and Fragment shaders were each defined as a `std::string` directly in our pass:[C++] program. It's better practice to load our GLSL shader from files. This gives a better program structure. As shaders are loaded, compiled, and linked at run-time, it also allows us to change what our shaders do without re-building our pass:[C++] program. To read files we use `fstream` from the standard library (`#include <fstream>`), and add a simple `loadShader` function.
+
+[source, cpp]
+----
+include::main.cpp[tags=loadShader]
+----
+
+==== Fragment Shader
+
+The color of fragments is determined by the Fragment Shader. In order to color our triangle appropriately (with different colors per vertex, smoothly interpolated across the triangle) we need more information coming in to the fragment shader - we want to pass in the color for each fragment.
+
+Input variables are passed to the Fragment Shader from the Rasteriser, which creates them from Output variables from the previous stage, which is usually the Vertex Shader. The Rasterizer, by default, interpolates these variables across the surface of the primitive, though this can be disabled if required.
+
+Let's update our Fragment Shader to this effect
+
+[source, glsl]
+----
+include::fragmentShader.glsl[]]
+----
+
+==== Vertex Shader
+
+In order for the Fragment Shader to receive more information, we need to output more information from the Vertex Shader. This is done with an output variable, which *MUST* have the same *name* and *signature* as the input variable to the Fragment Shader - except `in` should be `out`.
+
+Our Vertex Shader could now look as follows. We'll hard-code the output variable for now. Let's use just Blue, to make it clear this is working.
+
+//highlighting as C
+[source, glsl]
+----
+#version 330
+in vec2 position;
+out vec4 fragmentColor;
+void main()
+{
+     gl_Position = vec4(position, 0.0, 1.0);
+     fragmentColor = vec4(0.0, 0.0, 1.0, 1.0);
+}
+----
+
+Next we need to pass more information into the Vertex Shader. Uniform variables as we've used before are the same for all vertices, we need to have different color values for each vertex, just like we have different position values. This is what *Attributes* do.
+
+Let's add that to our Vertex Shader, and pass that incoming value onwards.
+
+[source, glsl]
+----
+include::vertexShader.glsl[]
+----
+
+==== Vertex Data
+
+That was easy enough, but if you run it you'll notice that the triangle is now Black. That's because the incoming attribute `vertexColor` hasn't been set by *our* pass:[C++] program, so `vertexColor` is still the default value for a vec4 ({0.0, 0.0, 0.0, 0.0}). We'll have to change our pass:[C++] program to provide this information.
+
+The first thing we need is the color information in our pass:[C++] program. There are three main approaches to this:
+
+. have an array for position and another array for color
+. have a single array for both, with all the positions data, then all the color data
+. have a single array for both, with all the information for each vertex together, then the next vertex. This is called *INTERLEAVING* - the color information is interleaved with the position information.
+  **  we'll take this approach.
+
+Our variable `vertexData` will now look like this:
+
+.vertexData
+[source, cpp]
+----
+include::main.cpp[tags=vertexData]
+----
+
+==== Attribute location
+
+Everything we've been doing for the position attribute we also need to do for the color attribute.
+
+We need to have a `GLint` to store in pass:[C++] the location of the `vertexColor` attribute in our GLSL.
+
+.GLVariables
+[source, cpp]
+----
+include::main.cpp[tags=GLVariables]
+----
+
+We then need to ask OpenGL for that location once we've compiled and linked our GLSL.
+
+.initializeProgram
+[source, cpp]
+----
+include::main.cpp[tags=initializeProgram]
+----
+
+==== glVertexAttribPointer
+
+We need to tell OpenGL to use that location, and how to fill it from the buffer object. *VertexArray* objects store this information, which we then use when we render. This change is pretty important. Look up the specification for `glVertexAttribPointer`, and figure out what each parameter is doing.
+
+.initializeVertexArrayObject
+[source, cpp]
+----
+include::main.cpp[tags=initializeVertexArrayObject]
+----
+
+==== Render
+
+Our Render function is unchanged, except for removing the unused *uniform* variable for color. At this point nothing is changing between frames, but we could add some new, useful, uniform variables to allow change.
+
+.render
+[source, cpp]
+----
+include::main.cpp[tags=render]
+----

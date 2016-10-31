@@ -1,0 +1,26 @@
+=== Build the solution/make files
+
+* make sure you have the repository - see <<gettingTheSource, gettingTheSource>>
+
+==== Visual Studio
+
+[source, bat]
+----
+git checkout %EXAMPLE%
+git pull
+./premake5.bat vs2015
+----
+
+1. Load the `.sln` file
+2. Build and run the project you wish to explore - kbd:[F5]
+
+==== Linux, OS X with Make
+
+[source, bash]
+----
+git checkout $EXAMPLE
+git pull
+./premake5 gmake
+make $EXAMPLE
+./src/$EXAMPLE/$EXAMPLE-debug
+----
